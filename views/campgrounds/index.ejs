@@ -9,7 +9,7 @@
     <h1>All Campgrounds</h1>
     <ul>
         <% for(let i = 0; i < campgrounds.length; i++) { %>
-            <li><%= campgrounds[i].title %></li>
+            <li><a href="/campgrounds/<%= campgrounds[i]._id %>"><%= campgrounds[i].title %></a></li>
         <% } %>
     </ul>
     
