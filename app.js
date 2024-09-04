@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose=require('mongoose');
+const methodOverride=require('method-override')
 const app = express()
 const port = 3000
 const path=require('path');
@@ -15,6 +16,7 @@ app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'))
 
 app.use(express.urlencoded({ extended: true }));       //this is for converting the req data sent in meaningful form
+app.use(methodOverride('_method'))
 
 const db=mongoose.connection
 
@@ -48,6 +50,14 @@ app.get('/campgrounds/:id', async(req, res) => {
     res.render('campgrounds/show',{campground})
   })
 
+app.get('/campgrounds/:id/edit', async(req, res) => {
+    const campground= await Campground.findById(req.params.id)
+    res.render('campgrounds/edit',{campground})
+  })
+
+  app.put('/campgrounds/:id', async(req, res) => {
+    res.send('it worked')
+  })
 
 
 app.listen(port, () => {
